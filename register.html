@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Nepiz Store</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/captcha.css">
+    <link rel="icon" href="images/icon.png" type="image/png">
+</head>
+
+<body>
+    <div class="container" style="max-width: 450px; margin-top: 80px;">
+        <div class="card">
+            <div class="text-center mb-1">
+                <div class="logo" style="justify-content: center; margin-bottom: 1rem;">Nepiz Store <span
+                        style="font-size: 0.8rem; background: var(--color-secondary); color: var(--color-primary); padding: 2px 8px; border-radius: 12px; margin-left: 8px;">Official</span>
+                </div>
+            </div>
+            <h1 class="text-center">Create Account</h1>
+            <p class="text-center text-muted">Join Nepiz Store today</p>
+
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" required placeholder="Choose a username">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" required placeholder="your@email.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" required placeholder="Minimum 6 characters">
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" id="confirmPassword" required placeholder="Re-enter password">
+                </div>
+
+                <div id="errorMessage" class="text-danger" style="display: none; margin-bottom: 1rem;"></div>
+
+                <div id="captcha-container"></div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Create Account</button>
+            </form>
+
+            <div style="margin-top: 1.5rem; text-align: center;">
+                <p>Already have an account? <a href="login.html">Login here</a></p>
+            </div>
+
+            <div style="margin-top: 1rem; text-align: center; display: flex; justify-content: center; gap: 15px;">
+                <a href="index.html" class="text-muted">← Home</a>
+                <a href="about.html" class="text-muted">About Us</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+
+    <!-- Custom Scripts -->
+    <script src="js/firebase-config.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/captcha.js"></script>
+
+    <script>
+        // Redirect if already logged in
+        onAuthStateChanged(user => {
+            if (user) {
+                window.location.href = 'account.html';
+            }
+        });
+
+        // Initialize Captcha
+        const captcha = new Captcha('captcha-container');
+
+        // Handle registration form submission
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // Validate Captcha first
+            if (!captcha.validate()) {
+                return;
+            }
+
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const errorMessage = document.getElementById('errorMessage');
+
+            // Validate passwords match
+            if (password !== confirmPassword) {
+                errorMessage.textContent = 'Passwords do not match!';
+                errorMessage.style.display = 'block';
+                return;
+            }
+
+            // Validate password length
+            if (password.length < 6) {
+                errorMessage.textContent = 'Password must be at least 6 characters!';
+                errorMessage.style.display = 'block';
+                return;
+            }
+
+            try {
+                await registerUser(email, password, username);
+                alert('Registration successful! Please check your email to verify your account.');
+                window.location.href = 'login.html';
+            } catch (error) {
+                errorMessage.textContent = error.message;
+                errorMessage.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+
+</html>

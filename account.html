@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Account - Nepiz Store</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" href="images/icon.png" type="image/png">
+</head>
+
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">Nepiz Store <span
+                    style="font-size: 0.8rem; background: var(--color-secondary); color: var(--color-primary); padding: 2px 8px; border-radius: 12px; margin-left: 8px;">Official</span>
+            </div>
+            <button class="nav-toggle" onclick="toggleMobileMenu()">☰</button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="myorders.html">Orders</a></li>
+                <li><a href="account.html" class="active">Account</a></li>
+                <li><a href="#" onclick="logoutUser()" class="btn btn-outline" style="padding: 0.4rem 1rem;">Logout</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container section">
+        <h1>My Account</h1>
+
+        <div style="max-width: 600px; margin: 0 auto;">
+
+            <!-- Account Status -->
+            <div class="card">
+                <h2>Account Status</h2>
+                <div style="background: var(--color-background); padding: 1rem; border-radius: var(--border-radius);">
+                    <p style="margin-bottom: 0.5rem;">
+                        <strong>Email Verified:</strong>
+                        <span id="emailVerified">Checking...</span>
+                    </p>
+                    <p style="margin-bottom: 0;">
+                        <strong>Total Orders:</strong>
+                        <span id="totalOrders">Loading...</span>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Profile Information -->
+            <div class="card mt-3">
+                <h2>Profile Information</h2>
+                <div style="background: var(--color-background); padding: 1rem; border-radius: var(--border-radius);">
+                    <p style="margin-bottom: 0.5rem;">
+                        <strong>Username:</strong>
+                        <span id="username">Loading...</span>
+                    </p>
+                    <p style="margin-bottom: 0;">
+                        <strong>Email:</strong>
+                        <span id="email">Loading...</span>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Notification Settings -->
+            <div class="card mt-3">
+                <h2>Notifications</h2>
+                <p class="text-muted">Get real-time updates when your order status changes.</p>
+                <div id="notif-status" style="margin-bottom: 1rem; font-weight: 600;"></div>
+                <button id="enableCustNotifBtn" class="btn btn-warning" onclick="enableCustomerNotifications()">🔔
+                    Enable Notifications</button>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Nepiz Store</h3>
+                    <p>Your trusted source for digital products</p>
+                    <div class="social-links">
+                        <a href="https://wa.me/9779704794941" target="_blank" title="WhatsApp">
+                            <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp" style="width: 24px;">
+                        </a>
+                        <a href="https://www.facebook.com/profile.php?id=61587512822388&mibextid=wwXIfr&mibextid=wwXIfr" target="_blank"
+                            title="Facebook">
+                            <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook"
+                                style="width: 24px;">
+                        </a>
+                        <a href="https://www.instagram.com/nepizstore.co?igsh=MXNncm52cnRrczRzcw==" target="_blank" title="Instagram">
+                            <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram"
+                                style="width: 24px;">
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="shop.html">Shop</a>
+                    <a href="myorders.html">My Orders</a>
+                    <a href="account.html">Account</a>
+                    <a href="legal.html">Legal</a>
+                    <a href="about.html">About Us</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <p>WhatsApp: <a href="https://wa.me/9779704794941" style="color: white; display: inline;">+977 9704794941</a></p>
+                    <p>24/7 customer support available</p>
+                    <p>Email: <a href="mailto:nepizdigistore@gmail.com"
+                            style="color: white; display: inline;">nepizdigistore@gmail.com</a></p>
+                    <p>Contact us anytime via chat</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Nepiz Store. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+
+    <script src="js/firebase-config.js"></script>
+    <script src="js/auth.js"></script>
+
+    <script>
+        protectPage();
+
+        function toggleMobileMenu() {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
+
+        auth.onAuthStateChanged(user => {
+            if (!user) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // Email
+            document.getElementById('email').textContent = user.email;
+
+            // Email verified
+            document.getElementById('emailVerified').textContent =
+                user.emailVerified ? '✅ Yes' : '❌ No';
+
+            // Username
+            database.ref('users/' + user.uid).once('value')
+                .then(snapshot => {
+                    if (snapshot.exists() && snapshot.val().username) {
+                        document.getElementById('username').textContent = snapshot.val().username;
+                    } else {
+                        document.getElementById('username').textContent =
+                            user.displayName || user.email.split('@')[0];
+                    }
+                })
+                .catch(() => {
+                    document.getElementById('username').textContent =
+                        user.email.split('@')[0];
+                });
+
+            // Total orders
+            database.ref('orders')
+                .orderByChild('userId')
+                .equalTo(user.uid)
+                .once('value')
+                .then(snapshot => {
+                    document.getElementById('totalOrders').textContent =
+                        snapshot.numChildren();
+                })
+                .catch(() => {
+                    document.getElementById('totalOrders').textContent = '0';
+                });
+
+            // Email Verification Logic
+            const emailVerifiedSpan = document.getElementById('emailVerified');
+            if (!user.emailVerified) {
+                const verifyBtn = document.createElement('button');
+                verifyBtn.textContent = 'Verify Email';
+                verifyBtn.style.marginLeft = '10px';
+                verifyBtn.style.padding = '5px 10px';
+                verifyBtn.style.fontSize = '0.8rem';
+                verifyBtn.style.cursor = 'pointer';
+                verifyBtn.onclick = () => {
+                    user.sendEmailVerification()
+                        .then(() => {
+                            alert('Verification email sent! Please check your inbox.');
+                        })
+                        .catch((error) => {
+                            console.error('Error sending verification email:', error);
+                            alert('Failed to send verification email. Please try again later.');
+                        });
+                };
+                emailVerifiedSpan.appendChild(verifyBtn);
+            }
+        });
+
+        // Customer Notification UI Logic
+        function updateCustNotifButton() {
+            const btn = document.getElementById('enableCustNotifBtn');
+            const status = document.getElementById('notif-status');
+            if (!btn) return;
+
+            if (Notification.permission === "granted") {
+                btn.innerHTML = "✅ Notifications Active";
+                btn.classList.remove('btn-warning');
+                btn.classList.add('btn-success');
+                status.textContent = "Status: Enabled";
+                status.className = "text-success";
+            } else if (Notification.permission === "denied") {
+                btn.textContent = "❌ Notifications Blocked";
+                btn.disabled = true;
+                status.textContent = "Status: Blocked by Browser";
+                status.className = "text-danger";
+            } else {
+                status.textContent = "Status: Not Enabled";
+            }
+        }
+
+        function enableCustomerNotifications() {
+            // Play a test sound to "unlock" audio context
+            if (typeof customerNotificationSound !== 'undefined') {
+                customerNotificationSound.play().catch(e => console.log("Sound play delayed"));
+            }
+
+            Notification.requestPermission().then(permission => {
+                updateCustNotifButton();
+                if (permission === 'granted') {
+                    alert("✅ Browser notifications enabled! You'll receive alerts and sounds when your orders are completed.");
+                }
+            });
+        }
+
+        // Initialize button state
+        document.addEventListener('DOMContentLoaded', updateCustNotifButton);
+    </script>
+</body>
+
+</html>

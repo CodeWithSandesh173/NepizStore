@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nepiz Store - Gaming Top-ups & Subscriptions</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" href="images/icon.png" type="image/png">
+</head>
+
+<body>
+    <!-- Announcement Banner -->
+    <div id="announcementBanner" class="announcement-banner" style="display: none;">
+        <p id="announcementText"></p>
+        <button class="close-btn" onclick="closeAnnouncement()">×</button>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <div class="logo">Nepiz Store <span
+                    style="font-size: 0.8rem; background: var(--color-secondary); color: var(--color-primary); padding: 2px 8px; border-radius: 12px; margin-left: 8px;">Official</span>
+            </div>
+            <button class="nav-toggle" onclick="toggleMobileMenu()">☰</button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="blackfriday.html">Deals 🔥</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="myorders.html">My Orders</a></li>
+                <li><a href="account.html">Account</a></li>
+                <li><button id="themeToggleBtn" onclick="toggleTheme()" class="btn btn-outline"
+                        style="border:none; background:transparent; font-size: 1.2rem; padding: 0.5rem;"
+                        title="Switch to Dark Mode">🌙</button></li>
+                <li><a href="login.html" id="authLink" class="btn btn-primary"
+                        style="color: white; padding: 0.5rem 1.5rem;">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="section hero-section" style="color: white; text-align: center;">
+        <div class="container"
+            style="display: flex; align-items: center; justify-content: space-between; text-align: left; flex-wrap: wrap;">
+            <div style="flex: 1; min-width: 300px;">
+                <span
+                    style="background: rgba(255,255,255,0.2); padding: 5px 15px; border-radius: 20px; font-size: 0.9rem; margin-bottom: 1rem; display: inline-block; animation: fadeIn 1s;">🏆
+                    Nepal's #1 Trusted Shop with 10,000+ Customers</span>
+                <h1 style="color: white; font-size: 3.5rem; margin-bottom: 1rem; line-height: 1.1;">Premium Top-ups & <br> <span style="color: #60A5FA;">Subscriptions</span></h1>
+                <p style="font-size: 1.25rem; margin-bottom: 2rem; color: rgba(255,255,255,0.9); max-width: 600px;">
+                    Experience the fastest top-up service in Nepal. 100% Genuine, Secure, and Trusted since 2025.
+                </p>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <a href="shop.html" class="btn"
+                        style="background: white; color: var(--color-primary); font-size: 1.1rem; padding: 1rem 2.5rem; font-weight: 600; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">Explore
+                        Store</a>
+                    <a href="#testimonials" class="btn btn-outline"
+                        style="border-color: white; color: white; font-size: 1.1rem; padding: 1rem 2rem;">Customer
+                        Reviews</a>
+                </div>
+            </div>
+            <div class="floating"
+                style="flex: 1; min-width: 300px; display: flex; justify-content: center; padding: 2rem;">
+                <img src="images/hero_gaming.png" alt="Gaming Store"
+                    style="max-width: 100%; border-radius: 24px; filter: drop-shadow(0 15px 40px rgba(0,0,0,0.4));">
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Strip -->
+    <div class="trust-strip">
+        <div class="container grid grid-4">
+            <div class="trust-item">
+                <img src="https://cdn-icons-png.flaticon.com/512/758/758661.png"
+                    style="filter: brightness(0) saturate(100%) invert(32%) sepia(85%) rotate(193deg) brightness(97%) contrast(92%);"
+                    alt="SSL">
+                <h4>SSL Secured</h4>
+                <p>Encrypted Payments</p>
+            </div>
+            <div class="trust-item">
+                <img src="https://cdn-icons-png.flaticon.com/512/2910/2910791.png"
+                    style="filter: brightness(0) saturate(100%) invert(32%) sepia(85%) rotate(193deg) brightness(97%) contrast(92%);"
+                    alt="Delivery">
+                <h4>Instant Delivery</h4>
+                <p>Delivery in minutes</p>
+            </div>
+            <div class="trust-item">
+                <img src="https://cdn-icons-png.flaticon.com/512/1067/1067566.png"
+                    style="filter: brightness(0) saturate(100%) invert(32%) sepia(85%) rotate(193deg) brightness(97%) contrast(92%);"
+                    alt="Support">
+                <h4>24/7 Support</h4>
+                <p>We are here for you</p>
+            </div>
+            <div class="trust-item">
+                <img src="https://cdn-icons-png.flaticon.com/512/1162/1162232.png"
+                    style="filter: brightness(0) saturate(100%) invert(32%) sepia(85%) rotate(193deg) brightness(97%) contrast(92%);"
+                    alt="Verified">
+                <h4>Verified Shop</h4>
+                <p>Trusted by thousands</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Featured Categories -->
+    <section class="section reveal">
+        <div class="container">
+            <h2 class="text-center">Popular Categories</h2>
+            <div class="grid grid-3">
+                <div class="card glass-card text-center" style="cursor: pointer;"
+                    onclick="window.location.href='shop.html?category=PUBG UC'">
+                    <span
+                        style="font-size: 2.5rem; display: block; margin-bottom: 0.5rem; transition: transform 0.3s ease;">🎮</span>
+                    <h3>PUBG UC</h3>
+                    <p class="text-muted">Instant Delivery</p>
+                </div>
+                <div class="card glass-card text-center" style="cursor: pointer;"
+                    onclick="window.location.href='shop.html?category=Free Fire Diamonds'">
+                    <span
+                        style="font-size: 2.5rem; display: block; margin-bottom: 0.5rem; transition: transform 0.3s ease;">💎</span>
+                    <h3>Free Fire Diamonds</h3>
+                    <p class="text-muted">Instant Delivery</p>
+                </div>
+                <div class="card glass-card text-center" style="cursor: pointer;"
+                    onclick="window.location.href='shop.html?category=Subscriptions'">
+                    <span
+                        style="font-size: 2.5rem; display: block; margin-bottom: 0.5rem; transition: transform 0.3s ease;">⭐</span>
+                    <h3>Subscriptions</h3>
+                    <p class="text-muted">Spotify, Discord Nitro</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="section" style="background: var(--color-background);">
+        <div class="container">
+            <h2 class="text-center">Featured Products</h2>
+            <div id="featuredProducts" class="grid grid-3">
+                <!-- Products will be loaded here -->
+            </div>
+            <div class="text-center mt-4">
+                <a href="shop.html" class="btn btn-primary">View All Products</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section reveal" id="testimonials" style="background: var(--color-secondary);">
+        <div class="container">
+            <h2 class="text-center">Verified Customer Reviews</h2>
+            <p class="text-center text-muted mb-4">Trusted by over 10,000+ gamers across Nepal</p>
+            <div id="reviewsContainer" class="grid grid-3">
+                <!-- Reviews will be loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Nepiz Store</h3>
+                    <p>Your trusted source for digital products</p>
+                    <div class="social-links">
+                        <a href="https://wa.me/9779704794941" target="_blank" title="WhatsApp">
+                            <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp" style="width: 24px;">
+                        </a>
+                        <a href="https://discord.gg" target="_blank" title="Discord">
+                            <img src="https://cdn-icons-png.flaticon.com/512/3670/3670157.png" alt="Discord"
+                                style="width: 24px;">
+                        </a>
+                        <a href="https://www.facebook.com/profile.php?id=61587512822388&mibextid=wwXIfr&mibextid=wwXIfr" target="_blank"
+                            title="Facebook">
+                            <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook"
+                                style="width: 24px;">
+                        </a>
+                        <a href="https://www.instagram.com/nepizstore.co?igsh=MXNncm52cnRrczRzcw==" target="_blank" title="Instagram">
+                            <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram"
+                                style="width: 24px;">
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="shop.html">Shop</a>
+                    <a href="myorders.html">My Orders</a>
+                    <a href="account.html">Account</a>
+                    <a href="legal.html">Legal</a>
+                    <a href="about.html">About Us</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <p>WhatsApp: <a href="https://wa.me/9779704794941" style="color: white; display: inline;">+977 9704794941</a></p>
+                    <p>24/7 customer support available</p>
+                    <p>Email: <a href="mailto:nepizdigistore@gmail.comz"
+                            style="color: white; display: inline;">nepizdigistore@gmail.com</a></p>
+                    <p>Contact us anytime via chat</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Nepiz Store. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Chat Widget -->
+    <div class="chat-widget">
+        <button class="chat-toggle" onclick="toggleChat()">
+            💬
+            <div class="live-indicator"></div>
+        </button>
+        <div class="chat-window" id="chatWindow">
+            <div class="chat-header">
+                <span>24/7 Support</span>
+                <small style="display: block; font-size: 0.7rem; font-weight: normal; opacity: 0.8;">🟢 Typically
+                    replies in 5m</small>
+            </div>
+            <div class="chat-messages" id="chatMessages"></div>
+            <div class="chat-input-container">
+                <input type="text" id="chatInput" placeholder="Type your message...">
+                <button class="btn btn-primary" onclick="sendMessage()">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+
+    <!-- Custom Scripts -->
+    <script src="js/firebase-config.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/products.js"></script>
+    <script src="js/chat.js"></script>
+    <script src="js/announcements.js"></script>
+
+    <script src="js/reviews.js"></script>
+
+    <script>
+        // Toggle mobile menu
+        function toggleMobileMenu() {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
+
+        // Update nav based on auth state
+        onAuthStateChanged(user => {
+            const authLink = document.getElementById('authLink');
+            if (user) {
+                authLink.textContent = 'Logout';
+                authLink.onclick = async (e) => {
+                    e.preventDefault();
+                    await logoutUser();
+                    window.location.reload();
+                };
+            }
+        });
+
+        // Load featured products
+        window.addEventListener('DOMContentLoaded', () => {
+            getAllProducts(products => {
+                const featured = products.slice(0, 3);
+                const container = document.getElementById('featuredProducts');
+
+                featured.forEach(product => {
+                    const lowestPrice = product.packages[0].price;
+
+                    const card = document.createElement('div');
+                    card.className = 'product-card card glass-card reveal';
+                    card.innerHTML = `
+                        <div class="badge-hot">Popular</div>
+                        <img src="${product.image}" alt="${product.name}">
+                        <h3>${product.name}</h3>
+                        <p class="text-muted">${product.description}</p>
+                        <p class="price">From NPR ${lowestPrice}</p>
+                        <a href="shop.html#${product.id}" class="btn btn-primary">View Details</a>
+                    `;
+                    container.appendChild(card);
+                    observer.observe(card); // Observe new dynamic elements
+                });
+            });
+
+            // Load announcement
+            loadAnnouncement();
+        });
+    </script>
+    <script>
+        // Check auth state to toggle Create Account button
+        auth.onAuthStateChanged(user => {
+            const createAccountBtn = document.getElementById('createAccountBtn');
+            if (user) {
+                // User is logged in, hide Create Account button
+                if (createAccountBtn) createAccountBtn.style.display = 'none';
+            } else {
+                // User is not logged in, show Create Account button
+                if (createAccountBtn) createAccountBtn.style.display = 'inline-block';
+            }
+        });
+
+        // Intersection Observer for Reveal Animations
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+
+    <!-- Live Viewers Widget -->
+    <div class="glass-card live-viewers-widget" style="position: fixed; bottom: 20px; left: 20px; padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; display: flex; align-items: center; gap: 8px; z-index: 998; font-weight: 500; border-left: 3px solid #10B981; background: rgba(30, 41, 59, 0.8); color: white; backdrop-filter: blur(10px); box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+        <span style="width: 8px; height: 8px; background: #10B981; border-radius: 50%; display: inline-block; animation: pulse-green 2s infinite;"></span>
+        <span id="viewerCount">...</span> people is watching out site
+    </div>
+
+    <!-- Recent Purchase Notification Widget -->
+    <div id="purchaseNotification" class="purchase-notification">
+        <!-- Content added via JS -->
+    </div>
+
+    <script src="js/live-viewers.js"></script>
+    <script src="js/recent-purchases.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Account Action</title>
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+
+  <!-- Simple modern styling -->
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card {
+      background: #ffffff;
+      width: 360px;
+      padding: 28px;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+    }
+
+    h1 {
+      margin-bottom: 10px;
+      font-size: 22px;
+    }
+
+    p {
+      font-size: 14px;
+      color: #555;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 12px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 16px;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      background: #2563eb;
+      color: white;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1e40af;
+    }
+
+    .success {
+      color: #16a34a;
+      font-weight: 500;
+    }
+
+    .error {
+      color: #dc2626;
+      font-weight: 500;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 18px;
+      margin-bottom: 12px;
+      color: #2563eb;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="card">
+    <div class="logo">Nepiz Store</div>
+    <h1 id="title">Processing...</h1>
+    <p id="message">Please wait</p>
+
+    <!-- Password reset input -->
+    <input type="password" id="newPassword" placeholder="New password" style="display:none;" />
+    <button id="actionBtn" style="display:none;">Continue</button>
+  </div>
+
+  <script>
+    // 🔥 Firebase config (YOURS)
+    const firebaseConfig = {
+      apiKey: "AIzaSyAOmrpJBIFNx_29T22Ww1kLZFcMMQV0xmc",
+      authDomain: "nepizstoreofficial.firebaseapp.com",
+      databaseURL: "https://nepizstoreofficial-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "nepizstoreofficial",
+      storageBucket: "nepizstoreofficial.firebasestorage.app",
+      messagingSenderId: "430781730325",
+      appId: "1:430781730325:web:1b66bae96e1ff7b45b081c",
+      measurementId: "G-VL2HEPY2XG"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    const params = new URLSearchParams(window.location.search);
+    const mode = params.get("mode");
+    const oobCode = params.get("oobCode");
+
+    const title = document.getElementById("title");
+    const message = document.getElementById("message");
+    const button = document.getElementById("actionBtn");
+    const passwordInput = document.getElementById("newPassword");
+
+    // ✅ EMAIL VERIFICATION
+    if (mode === "verifyEmail") {
+      title.innerText = "Verify Email";
+      auth.applyActionCode(oobCode)
+        .then(() => {
+          message.innerHTML = "<span class='success'>Your email has been verified successfully.</span>";
+          button.style.display = "block";
+          button.innerText = "Go to Login";
+          button.onclick = () => window.location.href = "/login.html";
+        })
+        .catch(() => {
+          message.innerHTML = "<span class='error'>This verification link is invalid or expired.</span>";
+        });
+    }
+
+    // 🔐 PASSWORD RESET
+    else if (mode === "resetPassword") {
+      title.innerText = "Reset Password";
+      message.innerText = "Enter a new password below.";
+      passwordInput.style.display = "block";
+      button.style.display = "block";
+      button.innerText = "Reset Password";
+
+      button.onclick = () => {
+        const newPassword = passwordInput.value;
+        if (newPassword.length < 6) {
+          message.innerHTML = "<span class='error'>Password must be at least 6 characters.</span>";
+          return;
+        }
+
+        auth.confirmPasswordReset(oobCode, newPassword)
+          .then(() => {
+            message.innerHTML = "<span class='success'>Password reset successful.</span>";
+            button.innerText = "Login";
+            button.onclick = () => window.location.href = "/login.html";
+          })
+          .catch(() => {
+            message.innerHTML = "<span class='error'>Reset link expired or invalid.</span>";
+          });
+      };
+    }
+
+    // ❌ INVALID MODE
+    else {
+      title.innerText = "Invalid Request";
+      message.innerHTML = "<span class='error'>This action link is not valid.</span>";
+    }
+  </script>
+</body>
+</html>
