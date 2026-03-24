@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>NepizDigi Invoice</title>
+
+<style>
+body {
+    font-family: Arial;
+    background: #f4f4f4;
+    padding: 20px;
+}
+
+.invoice {
+    background: #fff;
+    padding: 25px;
+    max-width: 900px;
+    margin: auto;
+    border-radius: 10px;
+}
+
+/* Logo */
+.logo {
+    text-align: center;
+}
+.logo img {
+    max-width: 120px;
+}
+
+h1, h2 { text-align: center; }
+
+input {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    padding: 5px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+button {
+    margin-top: 10px;
+    padding: 8px 15px;
+    cursor: pointer;
+}
+
+.right { text-align: right; }
+
+/* PRINT CLEAN */
+@media print {
+    .no-print {
+        display: none !important;
+    }
+}
+</style>
+
+</head>
+<body>
+
+<div class="invoice">
+
+    <!-- LOGO -->
+    <div class="logo">
+        <!-- Replace nepizlogo.png with your file name -->
+        <img src="nepizlogo.png" alt="NepizDigi Logo">
+    </div>
+
+    <h1 contenteditable="true">NEPIZDIGI.STORE</h1>
+    <p contenteditable="true" style="text-align:center;">
+        Kathmandu, Nepal | support@nepizdigi.store
+    </p>
+
+    <h2>INVOICE</h2>
+
+    <label>Customer Name:</label>
+    <input type="text">
+
+    <label>Email:</label>
+    <input type="text">
+
+    <label>Invoice No:</label>
+    <input type="text" value="NDS-2026-">
+
+    <label>Payment Method:</label>
+    <input type="text">
+
+    <table id="itemsTable">
+        <thead>
+            <tr>
+                <th>S.N</th>
+                <th>Description</th>
+                <th>Qty</th>
+                <th>Price (NPR)</th>
+                <th>Total</th>
+                <th class="no-print">❌</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td><input type="text" value="Website Development"></td>
+                <td><input type="number" value="1" oninput="calc()"></td>
+                <td><input type="number" value="0" oninput="calc()"></td>
+                <td class="total">0</td>
+                <td class="no-print">
+                    <button onclick="removeRow(this)">X</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <button class="no-print" onclick="addRow()">➕ Add Item</button>
+
+    <div class="right">
+        <p>Subtotal: <span id="subtotal">0</span> NPR</p>
+        <p>Tax: <input type="number" id="tax" value="0" oninput="calc()"> NPR</p>
+        <h3>Grand Total: <span id="grandTotal">0</span> NPR</h3>
+    </div>
+
+    <div style="margin-top:40px;">
+        <p>__________________________</p>
+        <p contenteditable="true"><strong>Developer Signature</strong></p>
+    </div>
+
+    <button class="no-print" onclick="window.print()">🖨 Print / Save PDF</button>
+
+</div>
+
+<script>
+function calc() {
+    let rows = document.querySelectorAll("#itemsTable tbody tr");
+    let subtotal = 0;
+
+    rows.forEach((row, index) => {
+        row.cells[0].innerText = index + 1;
+
+        let qty = row.cells[2].querySelector("input").value || 0;
+        let price = row.cells[3].querySelector("input").value || 0;
+
+        let total = qty * price;
+        row.querySelector(".total").innerText = total;
+
+        subtotal += total;
+    });
+
+    document.getElementById("subtotal").innerText = subtotal;
+
+    let tax = parseFloat(document.getElementById("tax").value) || 0;
+    document.getElementById("grandTotal").innerText = subtotal + tax;
+}
+
+function addRow() {
+    let table = document.querySelector("#itemsTable tbody");
+    let row = table.insertRow();
+
+    row.innerHTML = `
+        <td></td>
+        <td><input type="text"></td>
+        <td><input type="number" value="1" oninput="calc()"></td>
+        <td><input type="number" value="0" oninput="calc()"></td>
+        <td class="total">0</td>
+        <td class="no-print"><button onclick="removeRow(this)">X</button></td>
+    `;
+}
+
+function removeRow(btn) {
+    btn.parentElement.parentElement.remove();
+    calc();
+}
+</script>
+
+</body>
+</html>
