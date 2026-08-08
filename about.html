@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Nepiz Store</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" href="images/icon.png" type="image/png">
+    <style>
+        .about-hero {
+            background: linear-gradient(rgba(26, 115, 232, 0.9), rgba(23, 78, 166, 0.9)), url('images/hero_gaming.png');
+            background-size: cover;
+            background-position: center;
+            padding: 100px 0;
+            color: white;
+            text-align: center;
+        }
+
+        .mission-section {
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+            margin-top: -50px;
+        }
+
+        .mission-content {
+            flex: 1;
+        }
+
+        .mission-image {
+            flex: 1;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow-lg);
+            overflow: hidden;
+        }
+
+        .mission-image img {
+            width: 100%;
+            display: block;
+        }
+
+        .value-card {
+            padding: 2.5rem;
+            text-align: center;
+            border-radius: var(--border-radius);
+            background: var(--color-white);
+            border: 1px solid var(--color-border);
+            transition: var(--transition);
+        }
+
+        .value-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--color-primary);
+        }
+
+        .value-card .icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--color-primary);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: var(--color-text-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .story-section {
+            background: var(--color-secondary);
+            border-radius: 2rem;
+            padding: 4rem;
+            margin: 4rem 0;
+        }
+
+        body.dark-mode .story-section {
+            background: #252f3f;
+        }
+
+        @media (max-width: 768px) {
+            .mission-section {
+                flex-direction: column;
+                margin-top: 0;
+                gap: 2rem;
+            }
+
+            .story-section {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <div class="logo">Nepiz Store <span
+                    style="font-size: 0.8rem; background: var(--color-secondary); color: var(--color-primary); padding: 2px 8px; border-radius: 12px; margin-left: 8px;">Official</span>
+            </div>
+            <button class="nav-toggle" onclick="toggleMobileMenu()">☰</button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="blackfriday.html">Deals 🔥</a></li>
+                <li><a href="about.html" class="active">About</a></li>
+                <li><a href="myorders.html">Orders</a></li>
+                <li><a href="account.html">Account</a></li>
+                <li><a href="login.html" id="authLink" class="btn btn-primary"
+                        style="color: white; padding: 0.5rem 1.5rem;">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- About Hero -->
+    <section class="about-hero">
+        <div class="container">
+            <h1 style="color: white; font-size: 3.5rem; margin-bottom: 1rem;">Our Mission to Empower Gamers</h1>
+            <p style="font-size: 1.25rem; max-width: 700px; margin: 0 auto; opacity: 0.9;">
+                Providing the fastest, most secure, and most affordable digital products to the gaming community in
+                Nepal since 2082 BS.
+            </p>
+        </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section class="section container">
+        <div class="mission-section">
+            <div class="mission-content reveal">
+                <span
+                    style="color: var(--color-primary); font-weight: 700; text-transform: uppercase; letter-spacing: 2px;">Who
+                    We Are</span>
+                <h2 style="margin-top: 1rem;">Building Trust Through Excellence</h2>
+                <p>
+                    Nepiz Store was founded with a single mission: to bridge the gap between gamers and their favorite
+                    digital content. We understand the frustrations of slow deliveries and insecure payments. That's why
+                    we've built a platform that prioritizes **speed, security, and transparency**.
+                </p>
+                <p>
+                    <strong>Contact Support:</strong> <a href="mailto:nepizdigistore@gmail.com">nepizdigistore@gmail.com</a>
+                </p>
+                <p>
+                    From PUBG UC and Free Fire Diamonds to Steam Gift Cards and Spotify subscriptions, we provide
+                    genuine products with **instant delivery**. Every transaction is backed by our dedicated 24/7
+                    support team, ensuring you never have to worry about your digital assets.
+                </p>
+                <div style="margin-top: 2rem;">
+                    <a href="shop.html" class="btn btn-primary">Start Shopping</a>
+                </div>
+            </div>
+            <div class="mission-image reveal">
+                <img src="images/hero_gaming.png" alt="Gaming Community">
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="section"
+        style="background: var(--color-background); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border);">
+        <div class="container grid grid-4">
+            <div class="stat-item reveal">
+                <span class="stat-number">10K+</span>
+                <span class="stat-label">Happy Customers</span>
+            </div>
+            <div class="stat-item reveal" style="transition-delay: 0.1s;">
+                <span class="stat-number">50K+</span>
+                <span class="stat-label">Orders Delivered</span>
+            </div>
+            <div class="stat-item reveal" style="transition-delay: 0.2s;">
+                <span class="stat-number">24/7</span>
+                <span class="stat-label">Expert Support</span>
+            </div>
+            <div class="stat-item reveal" style="transition-delay: 0.3s;">
+                <span class="stat-number">100%</span>
+                <span class="stat-label">Genuine Products</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="section container">
+        <h2 class="text-center">Our Core Values</h2>
+        <p class="text-center text-muted mb-4">The principles that guide every decision we make.</p>
+        <div class="grid grid-3">
+            <div class="value-card reveal">
+                <span class="icon">🛡️</span>
+                <h3>Top-Tier Security</h3>
+                <p>We use industry-leading encryption and Firebase security to ensure your personal data and payments
+                    are always protected.</p>
+            </div>
+            <div class="value-card reveal" style="transition-delay: 0.1s;">
+                <span class="icon">⚡</span>
+                <h3>Lighting Fast</h3>
+                <p>Time is of the essence in gaming. Our automated systems ensure most digital codes are delivered to
+                    your account in minutes.</p>
+            </div>
+            <div class="value-card reveal" style="transition-delay: 0.2s;">
+                <span class="icon">💎</span>
+                <h3>Unmatched Quality</h3>
+                <p>We only source from official channels and authorized distributors, guaranteeing the legitimacy of
+                    every product we sell.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Story Section -->
+    <section class="container">
+        <div class="story-section reveal">
+            <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+                <span style="color: var(--color-primary); font-weight: 700; text-transform: uppercase;">Our Story</span>
+                <h2 style="margin-top: 1rem;">Born From a Passion for Gaming</h2>
+                <p style="font-size: 1.1rem; line-height: 1.8;">
+                    Nepiz Store wasn't started in a boardroom; it was started in front of a keyboard. As gamers ourselves,
+                    we were tired of the lack of reliable digital product platforms in Nepal. We wanted a place that
+                    felt premium, worked flawlessly, and treated every customer like a pro player.
+                </p>
+                <p style="font-size: 1.1rem; line-height: 1.8;">
+                    In 2082 BS, we launched Nepiz Store with just a handful of products and a commitment to
+                    trust. Today, we
+                    serve thousands of customers daily, but our goal remains the same: to be the most trusted name in
+                    digital entertainment for Nepal.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Join Community Section -->
+    <section class="section container text-center reveal">
+        <h2>Join Our Elite Community</h2>
+        <p class="text-muted mb-4">Stay updated with the latest deals, giveaways, and gaming news.</p>
+        <div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+            <a href="https://discord.gg" target="_blank" class="btn btn-secondary"
+                style="display: flex; align-items: center; gap: 0.5rem;">
+                <img src="https://cdn-icons-png.flaticon.com/512/3670/3670157.png" alt="Discord" style="width: 20px;">
+                Join Discord
+            </a>
+            <a href="https://www.facebook.com/profile.php?id=61587512822388&mibextid=wwXIfr&mibextid=wwXIfr" target="_blank" class="btn btn-secondary"
+                style="display: flex; align-items: center; gap: 0.5rem;">
+                <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" style="width: 20px;">
+                Follow Facebook
+            </a>
+            <a href="https://www.instagram.com/nepizstore.co?igsh=MXNncm52cnRrczRzcw==" target="_blank" class="btn btn-secondary"
+                style="display: flex; align-items: center; gap: 0.5rem;">
+                <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" style="width: 20px;">
+                Follow Instagram
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Nepiz Store</h3>
+                    <p>Your trusted source for digital products</p>
+                    <div class="social-links">
+                        <a href="https://wa.me/9779704794941" target="_blank" title="WhatsApp">
+                            <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp" style="width: 24px;">
+                        </a>
+                        <a href="https://discord.gg" target="_blank" title="Discord">
+                            <img src="https://cdn-icons-png.flaticon.com/512/3670/3670157.png" alt="Discord"
+                                style="width: 24px;">
+                        </a>
+                        <a href="https://www.facebook.com/profile.php?id=61587512822388&mibextid=wwXIfr&mibextid=wwXIfr" target="_blank"
+                            title="Facebook">
+                            <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook"
+                                style="width: 24px;">
+                        </a>
+                        <a href="https://www.instagram.com/nepizstore.co?igsh=MXNncm52cnRrczRzcw==" target="_blank" title="Instagram">
+                            <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram"
+                                style="width: 24px;">
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="shop.html">Shop</a>
+                    <a href="myorders.html">My Orders</a>
+                    <a href="account.html">Account</a>
+                    <a href="legal.html">Legal</a>
+                    <a href="about.html">About Us</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <p>WhatsApp: <a href="https://wa.me/9779704794941" style="color: white; display: inline;">+977 9704794941</a></p>
+                    <p>24/7 customer support available</p>
+                    <p>Email: <a href="mailto:nepizdigistore@gmail.com"
+                            style="color: white; display: inline;">nepizdigistore@gmail.com</a></p>
+                    <p>Contact us anytime via chat</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Nepiz Store. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Chat Widget (Reused from Index) -->
+    <div class="chat-widget">
+        <button class="chat-toggle" onclick="toggleChat()">💬</button>
+        <div class="chat-window" id="chatWindow">
+            <div class="chat-header">
+                <span>24/7 Support</span>
+            </div>
+            <div class="chat-messages" id="chatMessages"></div>
+            <div class="chat-input-container">
+                <input type="text" id="chatInput" placeholder="Type your message...">
+                <button class="btn btn-primary" onclick="sendMessage()">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+
+    <!-- Custom Scripts -->
+    <script src="js/firebase-config.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/chat.js"></script>
+
+    <script>
+        function toggleMobileMenu() {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
+
+        // Intersection Observer for Reveal Animations
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Update nav based on auth state
+        onAuthStateChanged(user => {
+            const authLink = document.getElementById('authLink');
+            if (user) {
+                authLink.textContent = 'Logout';
+                authLink.onclick = async (e) => {
+                    e.preventDefault();
+                    await logoutUser();
+                    window.location.reload();
+                };
+            }
+        });
+    </script>
+</body>
+
+</html>
